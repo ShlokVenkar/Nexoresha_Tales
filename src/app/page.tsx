@@ -1,6 +1,7 @@
 import BackgroundVideo from '@/components/BackgroundVideo';
 import Navbar from '@/components/Navbar';
 import ScrollSections from '@/components/ScrollSections';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -13,6 +14,8 @@ export default function Home() {
 
       {/* HTML Overlay Content Sections mapped to scroll */}
       <ScrollSections />
+
+      <Footer />
     </main>
   );
 }

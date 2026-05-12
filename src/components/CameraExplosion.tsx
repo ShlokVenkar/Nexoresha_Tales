@@ -31,7 +31,7 @@ export default function CameraExplosion({ frameIndex }: CameraExplosionProps) {
           <img
             src={`/frames/ezgif-frame-${frameIndex.toString().padStart(3, '0')}.jpg`}
             alt="Camera Explosion Sequence"
-            className="w-full h-full object-cover select-none pointer-events-none"
+            className="w-full h-full object-contain md:object-cover scale-[0.9] md:scale-100 select-none pointer-events-none transition-transform duration-300"
           />
         </div>
       </motion.div>
