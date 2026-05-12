@@ -4,20 +4,22 @@ import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useScroll, useTransform } from 'framer-motion';
 import { motion } from 'framer-motion-3d';
-import { MeshTransmissionMaterial, Environment } from '@react-three/drei';
+import { Environment } from '@react-three/drei';
 import * as THREE from 'three';
 
 export default function CameraModel() {
   const group = useRef<THREE.Group>(null);
   const { scrollYProgress } = useScroll();
 
-  // Animation values based on scroll
-  const explodeZ = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.75, 1], [0, 0, 5, 5, 0]);
-  const explodeY = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.75, 1], [0, 0, 3, 3, 0]);
+  // Animation values based on scroll (reduced distances so they don't fly off screen)
+  const explodeZ = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.75, 1], [0, 0, 2.5, 2.5, 0]);
+  const explodeY = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.75, 1], [0, 0, 1.5, 1.5, 0]);
   
-  // Rotations for the entire rig
-  const groupRotationY = useTransform(scrollYProgress, [0, 1], [-Math.PI / 8, Math.PI * 1.5]);
-  const groupRotationX = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.3, 0.1]);
+  // Lens facing right is -Math.PI / 2. Adding 0.2 angles it slightly towards the user.
+  // We rotate it to face the other side (Math.PI / 2) by the end of the scroll.
+  const groupRotationY = useTransform(scrollYProgress, [0, 1], [-Math.PI / 2 + 0.2, Math.PI / 2 - 0.2]);
+  const groupRotationX = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.2, 0.05]);
+  const groupScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.0, 0.5, 1.0]);
 
   // Exploding Parts Translations
   const lensForwardZ = useTransform(explodeZ, v => v * 1.5);
@@ -39,8 +41,8 @@ export default function CameraModel() {
       ref={group}
       rotation-y={groupRotationY}
       rotation-x={groupRotationX}
-      position={[0, 0, 0]}
-      scale={1.0}
+      position={[0.5, 0, 0]} // Shifted slightly right to center the visual mass
+      scale={groupScale}
     >
       {/* 1. MAIN BODY (RED style cubic body) */}
       <motion.group>
@@ -188,26 +190,27 @@ export default function CameraModel() {
         {/* Front Glass Element (Explodes further out) */}
         <motion.group position-z={lensInnerForwardZ}>
           <mesh position={[0, 0, 3.5]} rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[1.4, 1.4, 0.2, 64]} />
-            <MeshTransmissionMaterial 
-              thickness={0.8}
-              roughness={0.02}
+            <cylinderGeometry args={[1.4, 1.4, 0.2, 32]} />
+            <meshPhysicalMaterial 
+              roughness={0.05}
               transmission={1}
-              ior={1.6}
-              chromaticAberration={0.08}
+              ior={1.5}
+              thickness={0.5}
               color="#ffeedd"
-              backside
+              transparent
+              opacity={0.9}
             />
           </mesh>
           {/* Inner Floating Glass */}
           <mesh position={[0, 0, 3.2]} rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[1.2, 1.2, 0.1, 64]} />
-            <MeshTransmissionMaterial 
-              thickness={0.3}
-              roughness={0.05}
-              transmission={0.9}
+            <cylinderGeometry args={[1.2, 1.2, 0.1, 32]} />
+            <meshPhysicalMaterial 
+              roughness={0.1}
+              transmission={0.8}
               ior={1.4}
               color="#e6d5c3"
+              transparent
+              opacity={0.8}
             />
           </mesh>
         </motion.group>
