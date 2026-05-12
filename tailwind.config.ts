@@ -11,8 +11,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        maroon: "#2B0F14",
-        wine: "#3A141C",
+        maroon: "#8B0015",
+        wine: "#5E000E",
         gold: "#D4AF37",
         beige: "#E8DCCB",
         cream: "#F5EBDD",

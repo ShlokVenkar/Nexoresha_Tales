@@ -19,7 +19,7 @@ export default function BackgroundVideo() {
 
   return (
     <motion.div 
-      className="fixed inset-0 w-full h-full z-[-1] overflow-hidden bg-[#2B0F14]" // Solid Maroon base
+      className="fixed inset-0 w-full h-full z-[-1] overflow-hidden bg-[#8B0015]" // Solid Maroon base
       style={{ filter: blur }}
     >
       <motion.video
@@ -34,9 +34,9 @@ export default function BackgroundVideo() {
         src="https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-posing-in-a-forest-41135-large.mp4"
       />
       {/* Heavy Maroon color grading overlay */}
-      <div className="absolute inset-0 bg-[#500000] mix-blend-multiply opacity-100" />
-      <div className="absolute inset-0 bg-[#3A141C] mix-blend-color opacity-60" />
-      <div className="absolute inset-0 bg-gradient-radial from-transparent to-[#12080A] opacity-90" />
+      <div className="absolute inset-0 bg-[#8B0015] mix-blend-multiply opacity-90" />
+      <div className="absolute inset-0 bg-[#5E000E] mix-blend-color opacity-60" />
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-[#1A0003] opacity-90" />
       {/* Extra dark overlay to ensure text never hides */}
       <div className="absolute inset-0 bg-black opacity-50" />
     </motion.div>

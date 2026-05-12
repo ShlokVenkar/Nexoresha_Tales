@@ -21,7 +21,7 @@ export default function Navbar() {
 
     // Add glassmorphism background after scroll
     if (latest > 50) {
-      setBackground('rgba(43, 15, 20, 0.4)'); // Maroon with opacity
+      setBackground('rgba(139, 0, 21, 0.4)'); // New Maroon with opacity
       setBackdropBlur('blur(16px)');
     } else {
       setBackground('rgba(0, 0, 0, 0)');

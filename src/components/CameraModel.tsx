@@ -65,7 +65,7 @@ export default function CameraModel() {
         </mesh>
         <mesh position={[1.45, 0.2, 0]}>
           <planeGeometry args={[1.0, 0.4]} />
-          <meshStandardMaterial color="#500000" emissive="#3A141C" emissiveIntensity={0.2} roughness={0.2} metalness={0.9} />
+          <meshStandardMaterial color="#8B0015" emissive="#5E000E" emissiveIntensity={0.2} roughness={0.2} metalness={0.9} />
         </mesh>
 
         {/* Record Button (Red Dot) */}
