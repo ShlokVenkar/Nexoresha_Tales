@@ -9,7 +9,7 @@ export default function BackgroundVideo() {
   
   // The video becomes slightly more blurred and darker as you scroll down
   const blur = useTransform(scrollYProgress, [0, 1], ["blur(4px)", "blur(12px)"]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.2]);
+  const opacity = useTransform(scrollYProgress, [0, 0.75, 0.85, 1], [0, 0, 0.3, 0.2]); // Hidden during Hero explosion sequence
 
   useEffect(() => {
     if (videoRef.current) {
